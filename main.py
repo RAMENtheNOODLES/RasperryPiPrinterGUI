@@ -12,6 +12,7 @@ if not os.path.exists(MOUNT_DIR):
 
 folders = os.listdir(MOUNT_DIR)
 sub_dir = []
+window = None
 
 
 def isUSBConnected():
@@ -38,7 +39,7 @@ def get_subdirs():
 layout = []
 
 
-def update_layout():
+def update_layout(refresh=True):
     global layout
     layout = [[sg.Text(f"USB: {isUSBConnected()}")]]
 
@@ -62,13 +63,21 @@ def update_layout():
         columns.append([sg.Button("< back")])
 
     layout.append([sg.Column(columns, scrollable=True, vertical_scroll_only=True)])
+    if refresh:
+        global window
+
+        window.close()
+        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(420, 380), no_titlebar=True, keep_on_top=True,
+                           location=(0, 0), finalize=True)
+        window.maximize()
 
 
 update_layout()
 
-window = sg.Window('Hello', layout, size=(380, 420))
-
 while True:
+    if window is None:
+        update_layout()
+
     event, values = window.read()
 
     if event in (sg.WIN_CLOSED, 'Cancel'):
@@ -78,8 +87,7 @@ while True:
         print("Refresh Drive")
         print(f"USB: {isUSBConnected()}")
         update_layout()
-        window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
+
         # layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
@@ -87,8 +95,6 @@ while True:
         sub_dir.append(event)
         print(*sub_dir)
         update_layout()
-        window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
         print(event)
 
     if event == "Transfer This Folder":
@@ -97,7 +103,5 @@ while True:
     if event == "< back":
         sub_dir.pop()
         update_layout()
-        window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
 
 window.close()
