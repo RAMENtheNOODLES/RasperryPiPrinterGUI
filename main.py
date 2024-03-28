@@ -21,7 +21,7 @@ def isUSBConnected():
 
 
 def rsync(source, destination):
-    os.system(f"rsync -vru {source} {destination}")
+    os.system(f"rsync -vrut --exclude-from=exclude.txt {source} {destination} --delete")
 
 
 def get_subdirs():
@@ -63,6 +63,8 @@ def update_layout(refresh=True):
         columns.append([sg.Button("Transfer This Folder")])
         columns.append([sg.Button("< back")])
 
+    columns.append([sg.Button("Exit")])
+
     layout.append([sg.Column(columns, scrollable=True, vertical_scroll_only=True, size=SIZE)])
     if refresh:
         global window
@@ -82,7 +84,7 @@ while True:
 
     event, values = window.read()
 
-    if event in (sg.WIN_CLOSED, 'Cancel'):
+    if event in (sg.WIN_CLOSED, 'Exit'):
         break
 
     if event == "Refresh Drive":
