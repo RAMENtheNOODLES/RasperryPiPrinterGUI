@@ -17,12 +17,6 @@ for folder in folders:
     print(folder)
     layout.append([sg.Button(folder)])
 
-layout = [
-    [sg.Text("What's your name?")],
-    [sg.InputText()],
-    [sg.Button('ok'), sg.Button('Cancel')]
-]
-
 window = sg.Window('Hello', layout)
 
 while True:
