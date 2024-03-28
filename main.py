@@ -31,7 +31,7 @@ def get_subdirs():
     return subdirs
 
 
-layout = [[sg.Text(f"USB: {isUSBConnected()}")]]
+layout = []
 
 
 def update_layout():
@@ -53,6 +53,8 @@ def update_layout():
         layout.append([sg.Button("Transfer This Folder")])
         layout.append([sg.Button("< back")])
 
+
+update_layout()
 
 window = sg.Window('Hello', layout)
 
