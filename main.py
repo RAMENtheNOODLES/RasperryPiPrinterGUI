@@ -25,6 +25,8 @@ def rsync(source, destination):
 def get_subdirs():
     global sub_dir
 
+    print(f"Subdir: {sub_dir}")
+
     subdirs = ""
     for directory in sub_dir:
         print(f"Processing {directory}")
