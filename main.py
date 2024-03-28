@@ -11,8 +11,11 @@ os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t ci
 
 folders = os.listdir(MOUNT_DIR)
 
+layout = []
+
 for folder in folders:
     print(folder)
+    layout.append([sg.Button(folder)])
 
 layout = [
     [sg.Text("What's your name?")],
