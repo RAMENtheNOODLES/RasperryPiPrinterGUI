@@ -17,6 +17,8 @@ for folder in folders:
     print(folder)
     layout.append([sg.Button(folder)])
 
+layout.sort()
+
 window = sg.Window('Hello', layout)
 
 while True:
@@ -24,6 +26,9 @@ while True:
 
     if event in (sg.WIN_CLOSED, 'Cancel'):
         break
+
+    if event in folders:
+        print(event, values)
 
     print('Hello', values[0], '!')
 
