@@ -66,7 +66,7 @@ def update_layout():
 
 update_layout()
 
-window = sg.Window('Hello', layout)
+window = sg.Window('Hello', layout, size=(380, 420))
 
 while True:
     event, values = window.read()
@@ -79,7 +79,7 @@ while True:
         print(f"USB: {isUSBConnected()}")
         update_layout()
         window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
+        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
         # layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
@@ -88,7 +88,7 @@ while True:
         print(*sub_dir)
         update_layout()
         window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
+        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
         print(event)
 
     if event == "Transfer This Folder":
@@ -98,6 +98,6 @@ while True:
         sub_dir.pop()
         update_layout()
         window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
+        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(380, 420))
 
 window.close()
