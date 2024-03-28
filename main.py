@@ -61,7 +61,7 @@ def update_layout():
         columns.append([sg.Button("Transfer This Folder")])
         columns.append([sg.Button("< back")])
 
-    layout.append(sg.Column(columns, scrollable=True, vertical_scroll_only=True))
+    layout.append([sg.Column(columns, scrollable=True, vertical_scroll_only=True)])
 
 
 update_layout()
