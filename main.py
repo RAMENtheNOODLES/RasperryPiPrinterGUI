@@ -29,7 +29,7 @@ def get_subdirs():
 
     subdirs = ""
     for directory in sub_dir:
-        #print(f"Processing {directory}")
+        print(f"Processing {directory}")
         subdirs += directory + "/"
 
     return subdirs
