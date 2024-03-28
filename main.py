@@ -66,9 +66,11 @@ while True:
         break
 
     if event == "Refresh Drive":
+        print("Refresh Drive")
         layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
+        print("folder found")
         sub_dir.append(event)
         print(*sub_dir)
         update_layout()
