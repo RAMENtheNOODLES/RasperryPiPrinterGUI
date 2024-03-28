@@ -42,9 +42,11 @@ def update_layout():
     global folders
 
     subdirs = get_subdirs()
+    print(f"Subdirs: {subdirs}")
 
     folders = os.listdir(MOUNT_DIR + subdirs)
 
+    print(f"Folders: {folders}")
     for folder in folders:
         print(folder)
         layout.append([sg.Button(folder)])
@@ -70,7 +72,7 @@ while True:
         print(f"USB: {isUSBConnected()}")
         update_layout()
         window.layout(layout)
-        #layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
+        # layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
         print("folder found")
