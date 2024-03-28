@@ -13,6 +13,7 @@ if not os.path.exists(MOUNT_DIR):
 folders = os.listdir(MOUNT_DIR)
 sub_dir = []
 window = None
+SIZE = (480, 320)
 
 
 def isUSBConnected():
@@ -62,13 +63,13 @@ def update_layout(refresh=True):
         columns.append([sg.Button("Transfer This Folder")])
         columns.append([sg.Button("< back")])
 
-    layout.append([sg.Column(columns, scrollable=True, vertical_scroll_only=True)])
+    layout.append([sg.Column(columns, scrollable=True, vertical_scroll_only=True, size=SIZE)])
     if refresh:
         global window
 
         if window is not None:
             window.close()
-        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(420, 380), no_titlebar=True, keep_on_top=True,
+        window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=SIZE, no_titlebar=True, keep_on_top=True,
                            location=(0, 0), finalize=True)
         window.maximize()
 
