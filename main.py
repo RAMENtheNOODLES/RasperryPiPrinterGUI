@@ -26,8 +26,8 @@ def get_subdirs():
     global sub_dir
 
     subdirs = ""
-    for dir in sub_dir:
-        sub_dir += dir + "/"
+    for directory in sub_dir:
+        sub_dir += directory + "/"
 
     return subdirs
 
