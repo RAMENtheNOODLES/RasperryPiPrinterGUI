@@ -70,6 +70,7 @@ while True:
 
     if event in folders:
         sub_dir.append(event)
+        print(*sub_dir)
         update_layout()
         print(event)
 
