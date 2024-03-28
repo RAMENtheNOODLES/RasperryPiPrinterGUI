@@ -54,14 +54,17 @@ def update_layout():
     print(f"Folders: {folders}")
     for folder in folders:
         print(folder)
-        columns.append(sg.Button(folder))
+        columns.append([sg.Button(folder)])
 
     layout.append(sg.Column(columns, scrollable=True, vertical_scroll_only=True))
 
-    layout.append([sg.Button("Refresh Drive")])
+    columns = [[sg.Button("Refresh Drive")]]
+
     if sub_dir:
-        layout.append([sg.Button("Transfer This Folder")])
-        layout.append([sg.Button("< back")])
+        columns.append([sg.Button("Transfer This Folder")])
+        columns.append([sg.Button("< back")])
+
+    layout.append(sg.Column(columns))
 
 
 update_layout()
