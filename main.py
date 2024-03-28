@@ -4,7 +4,7 @@ import os
 SERVER_IP = "192.168.1.67"
 SERVER_SHARE_FOLDER = "Main"
 MOUNT_DIR = f"/mnt/{SERVER_SHARE_FOLDER}/"
-USB_DIR = r"'/media/cookiejar/3D PRINTING'"
+USB_DIR = "'/media/cookiejar/3D PRINTING'"
 
 if not os.path.exists(MOUNT_DIR):
     os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t cifs -w -o username=admin -o "
@@ -49,10 +49,14 @@ def update_layout():
 
     folders = os.listdir(MOUNT_DIR + subdirs)
 
+    columns = []
+
     print(f"Folders: {folders}")
     for folder in folders:
         print(folder)
-        layout.append([sg.Button(folder)])
+        columns.append([sg.Button(folder)])
+
+    layout.append(sg.Column(columns, scrollable=True, vertical_scroll_only=True))
 
     layout.append([sg.Button("Refresh Drive")])
     if sub_dir:
