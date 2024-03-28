@@ -6,8 +6,9 @@ SERVER_SHARE_FOLDER = "Main"
 MOUNT_DIR = f"/mnt/{SERVER_SHARE_FOLDER}/"
 USB_DIR = r"/media/cookiejar/3D\ PRINTING"
 
-os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t cifs -w -o username=admin -o "
-          f"password=flatcow1644 //{SERVER_IP}/{SERVER_SHARE_FOLDER} {MOUNT_DIR}")
+if not os.path.exists(MOUNT_DIR):
+    os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t cifs -w -o username=admin -o "
+              f"password=flatcow1644 //{SERVER_IP}/{SERVER_SHARE_FOLDER} {MOUNT_DIR}")
 
 folders = os.listdir(MOUNT_DIR)
 sub_dir = []
