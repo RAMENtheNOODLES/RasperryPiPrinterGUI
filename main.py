@@ -66,7 +66,8 @@ def update_layout(refresh=True):
     if refresh:
         global window
 
-        window.close()
+        if window is not None:
+            window.close()
         window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout, size=(420, 380), no_titlebar=True, keep_on_top=True,
                            location=(0, 0), finalize=True)
         window.maximize()
