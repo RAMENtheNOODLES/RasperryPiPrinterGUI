@@ -54,7 +54,7 @@ def update_layout():
     print(f"Folders: {folders}")
     for folder in folders:
         print(folder)
-        columns.append([sg.Button(folder)])
+        columns.append(sg.Button(folder))
 
     layout.append(sg.Column(columns, scrollable=True, vertical_scroll_only=True))
 
