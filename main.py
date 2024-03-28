@@ -4,12 +4,13 @@ import os
 SERVER_IP = "192.168.1.67"
 SERVER_SHARE_FOLDER = "Main"
 MOUNT_DIR = f"/mnt/{SERVER_SHARE_FOLDER}/"
-USB_DIR = "/media/cookiejar/3D PRINTING"
+USB_DIR = r"/media/cookiejar/3D\ PRINTING"
 
 os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t cifs -w -o username=admin -o "
           f"password=flatcow1644 //{SERVER_IP}/{SERVER_SHARE_FOLDER} {MOUNT_DIR}")
 
 folders = os.listdir(MOUNT_DIR)
+sub_dir = []
 
 
 def isUSBConnected():
@@ -20,13 +21,38 @@ def rsync(source, destination):
     os.system(f"rsync -vru {source} {destination}")
 
 
+def get_subdirs():
+    global sub_dir
+
+    subdirs = ""
+    for dir in sub_dir:
+        sub_dir += dir + "/"
+
+    return subdirs
+
+
 layout = [[sg.Text(f"USB: {isUSBConnected()}")]]
 
-for folder in folders:
-    print(folder)
-    layout.append([sg.Button(folder)])
 
-layout.append([sg.Button("Refresh Drive")])
+def update_layout():
+    global layout
+    layout = [[sg.Text(f"USB: {isUSBConnected()}")]]
+
+    global folders
+
+    subdirs = get_subdirs()
+
+    folders = os.listdir(MOUNT_DIR + subdirs)
+
+    for folder in folders:
+        print(folder)
+        layout.append([sg.Button(folder)])
+
+    layout.append([sg.Button("Refresh Drive")])
+    if sub_dir:
+        layout.append([sg.Button("Transfer This Folder")])
+        layout.append([sg.Button("< back")])
+
 
 window = sg.Window('Hello', layout)
 
@@ -40,7 +66,14 @@ while True:
         layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
+        sub_dir = event
+        update_layout()
         print(event)
-        rsync(f"{MOUNT_DIR}{event}", f"{USB_DIR}")
+
+    if event == "Transfer This Folder":
+        rsync(f"{MOUNT_DIR}{get_subdirs()}", f"{USB_DIR}")
+
+    if event == "< back":
+        update_layout()
 
 window.close()
