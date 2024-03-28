@@ -75,6 +75,7 @@ while True:
         print(f"USB: {isUSBConnected()}")
         update_layout()
         window.layout(layout)
+        window.refresh()
         # layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
@@ -83,6 +84,7 @@ while True:
         print(*sub_dir)
         update_layout()
         window.layout(layout)
+        window.refresh()
         print(event)
 
     if event == "Transfer This Folder":
@@ -92,5 +94,6 @@ while True:
         sub_dir.pop()
         update_layout()
         window.layout(layout)
+        window.refresh()
 
 window.close()
