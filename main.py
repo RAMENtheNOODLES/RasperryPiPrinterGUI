@@ -4,7 +4,7 @@ import os
 SERVER_IP = "192.168.1.67"
 SERVER_SHARE_FOLDER = "Main"
 MOUNT_DIR = f"/mnt/{SERVER_SHARE_FOLDER}/"
-USB_DIR = "'/media/cookiejar/3D PRINTING'"
+USB_DIR = os.path.join('/', 'media', 'cookiejar', '3D PRINTING')
 
 if not os.path.exists(MOUNT_DIR):
     os.system(f"echo 'flatcow1644' | sudo -S mkdir {MOUNT_DIR} | sudo -S mount -t cifs -w -o username=admin -o "
