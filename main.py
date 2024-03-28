@@ -68,7 +68,7 @@ while True:
         layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
     if event in folders:
-        sub_dir = event
+        sub_dir.append(event)
         update_layout()
         print(event)
 
@@ -76,6 +76,7 @@ while True:
         rsync(f"{MOUNT_DIR}{get_subdirs()}", f"{USB_DIR}")
 
     if event == "< back":
+        sub_dir.pop()
         update_layout()
 
 window.close()
