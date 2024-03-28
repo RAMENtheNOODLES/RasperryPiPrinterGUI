@@ -74,6 +74,7 @@ while True:
         print("Refresh Drive")
         print(f"USB: {isUSBConnected()}")
         update_layout()
+        window.close()
         window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
         # layout[0] = [sg.Text(f"USB: {isUSBConnected()}")]
 
@@ -82,6 +83,7 @@ while True:
         sub_dir.append(event)
         print(*sub_dir)
         update_layout()
+        window.close()
         window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
         print(event)
 
@@ -91,6 +93,7 @@ while True:
     if event == "< back":
         sub_dir.pop()
         update_layout()
+        window.close()
         window = sg.Window(f'{MOUNT_DIR}{get_subdirs()}', layout)
 
 window.close()
