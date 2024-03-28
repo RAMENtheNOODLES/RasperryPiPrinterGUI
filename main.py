@@ -17,8 +17,6 @@ for folder in folders:
     print(folder)
     layout.append([sg.Button(folder)])
 
-layout.sort()
-
 window = sg.Window('Hello', layout)
 
 while True:
